@@ -102,15 +102,7 @@ function Table() {
         handleShowUpdate();
       };
 
-      //prop de los datos de la tabla
-      const [search, setSearch] = useState("");
-      const handleSearch = (event) => {
-        setSearch(event.target.value);
-        console.log(event.target.value);
-      };
-
-
-
+      
 
     return (
     <>
