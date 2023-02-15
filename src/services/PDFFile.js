@@ -1,14 +1,9 @@
 
-
-import React,{useEffect, useState, useRef} from 'react';
-import ReactDOM from 'react-dom/client';
-import Table from '../components/table/table.js';
-import Nabvar from '../components/header/navbar.js';
-import PDFFile from '../services/PDFFile.js';
+import React, { useState, useEffect } from 'react';
 import jsPDF from 'jspdf'
 import 'jspdf-autotable'
 
-function Home () {
+function PDFFile() {
   const [users, setUsers] = useState([]);
   useEffect(() => {
     fetch('https://users-db-55f93-default-rtdb.firebaseio.com/persons/.json')
@@ -52,27 +47,14 @@ function Home () {
     doc.save("table.pdf")
   }
 
-  const tableRef = useRef();
-    
+  return (
+    <button 
+    className= " btn btn-primary mt-3 "
+    onClick={downloadPdf}
+    >Imprimir</button> 
+  );
+
   
-	return (
-        <body className= " bg-light ">
-            <Nabvar/>
-            <main className= " container d-flex flex-column justify-content-center align-items-center ">
-                 <Table ref={tableRef}/>
-                 <button 
-                    className= " btn btn-primary mt-3 "
-                    onClick={downloadPdf}
-                 >Imprimir</button> 
-
-            </main>
-          
-         </body>
-
-
-
-	);
-
 }
 
-export default Home;
+export default PDFFile;

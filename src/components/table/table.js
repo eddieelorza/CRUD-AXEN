@@ -25,7 +25,6 @@ function Table() {
         setUsersList(data);
         setIsLoading(false);
       }, []);
-
       const postUser = useCallback(async (user) => {
         const data = await usersApi.storeUser(user);
         setUsersList(data);
@@ -103,24 +102,13 @@ function Table() {
         handleShowUpdate();
       };
 
-      //filtrar en buscador por nombre de usuario
-
-      const [search, setSearch] = useState("hola");
-      const [filteredUsers, setFilteredUsers] = useState(usersList);
-
-      useEffect(() => {
-        setFilteredUsers(
-          Object.keys(usersList).filter((key) => {
-            return usersList[key].name.first
-              .toLowerCase()
-              .includes(search.toLowerCase());
-          })
-        );
-      }, [search, usersList]);
-
+      //prop de los datos de la tabla
+      const [search, setSearch] = useState("");
       const handleSearch = (event) => {
         setSearch(event.target.value);
+        console.log(event.target.value);
       };
+
 
 
 
@@ -129,7 +117,7 @@ function Table() {
       <section className="w-100 d-flex flex-row justify-content-between align-items-center my-3 ">
         <span className="d-flex flex-row justify-content-between align-items-center">
             <h2 className="fw-bold">DIRECTORIO</h2>
-            <Form className="d-flex ms-3">
+            {/* <Form className="d-flex ms-3">
             <Form.Control
             onChange={handleSearch}
             value={search}
@@ -138,7 +126,7 @@ function Table() {
             className="me-2"
             aria-label="Search"
             />
-            </Form>
+            </Form> */}
         </span>
       <Button variant="primary" onClick={handleShow}>
         +
@@ -160,7 +148,7 @@ function Table() {
       </thead>
       {isLoading ? (
         <section className="d-flex justify-content-center align-items-center">
-          <div class="spinner-border text-primary w-100"></div>
+          <div class="spinner-border text-primary"></div>
         </section>
         
       ) : (
@@ -176,7 +164,6 @@ function Table() {
                   <td>{id}</td>
                   <td><img className="rounded-circle" src={picture} alt=""/></td>
                   <td>{name?.first}</td>
-
                   <td>{name?.last}</td>
                   <td>{email}</td>
                   <td>{phone}</td>
